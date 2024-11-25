@@ -1,0 +1,14 @@
+:root {
+    --orange: #f08e43;
+    --black: #2d2d38;
+    /* sedondary */
+    --text: #adb7be;
+    --card: #323437;
+    --background: #212224;
+}
+
+body {
+    font-family: "Open Sans", sans-serif !important;
+    background-color: var(--background) !important;
+    color: var(--text) !important;
+}
