@@ -12,3 +12,7 @@ body {
     background-color: var(--background) !important;
     color: var(--text) !important;
 }
+
+.card {
+    background-color: var(--card);
+}
