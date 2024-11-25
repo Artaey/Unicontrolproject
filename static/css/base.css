@@ -18,6 +18,14 @@ body {
 .card {
     background-color: var(--card) !important;
 }
+
+button {
+    background-color: var(--orange);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 3px !important;
+    border: 0px;
+}
 /*Common end*/
 
 /*Sidebar Start*/
@@ -46,3 +54,12 @@ nav label {
     font-size: 10px !important;
 }
 /*Sidebar end*/
+
+/*Header start*/
+header {
+    background-color: var(--card);
+    width: 100%;
+    height: auto;
+    margin-bottom: auto;
+    padding: 10px;
+}
