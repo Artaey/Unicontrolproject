@@ -63,6 +63,7 @@ header {
     margin-bottom: auto;
     padding: 10px;
     display: flex;
+    position: relative;
 }
 
 header div {
@@ -75,3 +76,11 @@ header div {
 }
 /*Header end*/
 
+/*Cart start*/
+.cart {
+    background-color: var(--card);
+    color: var(--text);
+    padding: 15px;
+    border-radius: 5px;
+}
+/*Cart end*/
