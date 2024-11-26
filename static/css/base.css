@@ -58,8 +58,20 @@ nav label {
 /*Header start*/
 header {
     background-color: var(--card);
-    width: 100%;
+    width: calc(100% - 250px - 1.5rem);
     height: auto;
     margin-bottom: auto;
     padding: 10px;
+    display: flex;
 }
+
+header div {
+    width: 150px;
+    min-width: 150px;
+}
+
+.header-text {
+    width: 100%;
+}
+/*Header end*/
+
