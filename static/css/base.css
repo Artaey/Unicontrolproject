@@ -112,3 +112,36 @@ header div {
     padding: 10px;
 }
 /*Username end*/
+
+/*Field start*/
+.fieldBox {
+    margin-top: 30px;
+}
+.h3Field {
+    padding: 10px;
+    display: flex;
+}
+
+.fieldBoxContent {
+    background-color: var(--card);
+    display: flex;
+}
+
+.fieldBoxContentImage {
+    padding: 20px;
+    display: flex;
+}
+
+.fieldBoxContentInnerContainer {
+    display: flex;
+}
+
+.fieldBoxContentInner {
+    display: flex;
+}
+
+.fieldBoxContentInnerMain,
+.fieldBoxContentInnerSecondary {
+    display: flex;
+}
+/*Field end*/
