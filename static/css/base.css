@@ -93,7 +93,7 @@ header div {
     padding: 15px;
     border-radius: 5px;
     position: fixed;
-    right: 0px;
+    right: calc((50% - (250px / 2)) * -1);
     top: 75px;
     width: calc(50% - (250px / 2));
 }

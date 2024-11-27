@@ -4,14 +4,42 @@
 <div class="page">
     {% include 'components/header.html'%}
     {% include 'components/cart.html'%} 
-    <div class="content d-flex justify-content-between">
-        hello
+    <div class="content">
     </div> 
 </div>
 {% endblock content %}
 
 {% block script %}
-    <script>
-        
-    </script>
-{% endblock %}
+<script defer>
+    const content = $(".content")
+    const cart = $(".cart");
+    let cartOut = false;
+
+    function getContentWidth() {
+        contentWidth = content.css("width");
+        return parseFloat(contentWidth) / 2 + "px"
+    };
+    
+    const btnOrder = $(".btnOrder").on("click", function () {
+        const contentWidth = getContentWidth();
+        console.log(contentWidth);
+        if (!cartOut) {
+            cart.css("right", 0)
+            let padding = contentWidth
+            content.css("padding-right", padding)
+        }else {
+            cart.css("right", "-" + contentWidth)
+            content.css("padding-right", "0px")
+        }
+        cartOut = !cartOut 
+    });
+
+    $(window).on("resize", function () {
+        if (cartOut) {
+            content.css("padding-right", getContentWidth());
+        } else {
+            cart.css("right", "-" + getContentWidth())
+        }
+    });
+</script>
+{% endblock script %}
