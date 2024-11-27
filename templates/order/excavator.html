@@ -4,8 +4,9 @@
 <div class="page">
     {% include 'components/header.html'%}
     {% include 'components/cart.html'%} 
-    <div class="content d-flex justify-content-between">
-        hello
+    <div class="content">
+        {% include 'components/username.html' %}
+        {% include 'components/field.html'%}
     </div> 
 </div>
 {% endblock content %}
