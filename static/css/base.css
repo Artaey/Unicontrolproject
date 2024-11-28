@@ -99,6 +99,8 @@ header div {
     right: calc((50% - (250px / 2)) * -1);
     top: 75px;
     width: calc(50% - (250px / 2));
+    max-height: calc(100% - 75px) !important;
+    overflow-y: scroll;
 }
 /*Cart end*/
 
