@@ -19,10 +19,6 @@ body {
     font-size: 14px !important;
 }
 
-.card {
-    background-color: var(--card) !important;
-}
-
 button {
     background-color: var(--orange);
     color: white;
@@ -72,6 +68,13 @@ nav label {
     font-size: 10px !important;
 }
 /*Sidebar end*/
+
+/*Index page start*/
+.productBox {
+    background-color: var(--card);
+    
+}
+/*Index page end*/
 
 /*Header start*/
 header {
