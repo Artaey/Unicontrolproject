@@ -13,6 +13,7 @@
 <script defer>
     const content = $(".content")
     const cart = $(".cart");
+    const btnOrder = $(".btnOrder")
     let cartOut = false;
 
     function getContentWidth() {
@@ -20,19 +21,23 @@
         return parseFloat(contentWidth) / 2 + "px"
     };
     
-    const btnOrder = $(".btnOrder").on("click", function () {
+    btnOrder.on("click", toggleCart);
+    $(".closeButton").on("click", toggleCart)
+
+    function toggleCart() {
         const contentWidth = getContentWidth();
-        console.log(contentWidth);
         if (!cartOut) {
             cart.css("right", 0)
             let padding = contentWidth
             content.css("padding-right", padding)
+            btnOrder.html("Hide order")
         }else {
             cart.css("right", "-" + contentWidth)
             content.css("padding-right", "0px")
+            btnOrder.html("Show order")
         }
         cartOut = !cartOut 
-    });
+    }
 
     $(window).on("resize", function () {
         if (cartOut) {

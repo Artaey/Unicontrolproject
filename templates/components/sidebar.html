@@ -12,12 +12,49 @@
                 <div>Products</div>
             </a>
         </li>
-        <label>ADMIN</label>
-        <li class="nav-item">
-            <a class="nav-link d-flex" href="/admin">
+        <li class="nav-item fakeLink">
+            <a class="nav-link active d-flex" href="#">
                 <i data-feather="layers"></i>
-                <div>Django admin</div>
+                <div>Orders</div>
+            </a>
+        </li>
+        <li class="nav-item fakeLink">
+            <a class="nav-link active d-flex" href="#">
+                <i data-feather="inbox"></i>
+                <div>Subscriptions</div>
+            </a>
+        </li>
+        <li class="nav-item fakeLink">
+            <a class="nav-link active d-flex" href="#">
+                <i data-feather="inbox"></i>
+                <div>Licenspool</div>
+            </a>
+        </li>
+        <li class="nav-item fakeLink">
+            <a class="nav-link active d-flex" href="#">
+                <i data-feather="user"></i>
+                <div>My profile</div>
+            </a>
+        </li>
+        <label style="color: red;">ADMIN</label>
+        <li class="nav-item" >
+            <a class="nav-link d-flex" href="/admin">
+                <i data-feather="layers" style="color: red;"></i>
+                <div style="color: red;">Django admin</div>
+            </a>
+        </li>
+        <label>SUPPORT</label>
+        <li class="nav-item fakeLink">
+            <a class="nav-link d-flex" href="#">
+                <i data-feather="help-circle"></i>
+                <div>Need support?</div>
             </a>
         </li>
     </ul>
 </nav>
+
+<script>
+    $(".fakeLink").on("click", function () {
+        alert("This link does not work in this prototype.\nOnly 'Products' work.")
+    })
+</script>
