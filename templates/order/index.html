@@ -2,14 +2,135 @@
 {% load static %}
 
 {% block content %}
-<div class="page"> 
-    <div class="productBox">
-        <img src="{% static 'images/excavator.png'%}" alt="">
-        Excavator
-        <button>ORDER</button>
+<div class="page p-4 pe-0">
+    <h4>Products</h4>
+    <div class="breadcrumb d-flex gap-2">
+        <a href="/"><i data-feather="home"></i></a> 
+        <p>/</p>
+        <b>Order</b>
     </div>
+    <div class="d-flex flex-wrap gap-4">
+        <div class="productBox d-flex flex-column">
+            <img src="{% static 'images/excavator.png'%}" alt="">
+            <div class="p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h5>
+                        Excavator
+                    </h5>
+                    <p>
+                        Machine control system for all types of excavators.
+                    </p>
+                </div>
+                <div class="linkButtonBox">
+                    <a class="linkButton" href="/excavator">ORDER</a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="productBox d-flex flex-column">
+            <img src="{% static 'images/wheel-loader.png'%}" alt="">
+            <div class="p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h5>
+                        Loader
+                    </h5>
+                    <p>
+                        3D machine control for all types of loaders.
+                    </p>
+                </div>
+                <div>
+                    <button class="fakeButton">ORDER</button>
+                </div>
+            </div>
+        </div>
+        <div class="productBox d-flex flex-column">
+            <img src="{% static 'images/dozer.png'%}" alt="">
+            <div class="p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h5>
+                        Blade
+                    </h5>
+                    <p>
+                        Intuitive and flexible 3D machine control system for all types of blade solutions, e.g. dozers, skid steers and scrapers. 
+                    </p>
+                </div>
+                <div>
+                    <button class="fakeButton">ORDER</button>
+                </div>
+            </div>
+        </div>
+        <div class="productBox d-flex flex-column">
+            <img src="{% static 'images/grading-attachement.png'%}" alt="">
+            <div class="p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h5>
+                        Grading attachement
+                    </h5>
+                    <p class="productBoxText">
+                        3D machine control system for all types of grading attachements.
+                    </p>
+                </div>
+                <div>
+                    <button class="fakeButton">ORDER</button>
+                </div>
+            </div>
+        </div>
+        <div class="productBox d-flex flex-column">
+            <img src="{% static 'images/u300_+_u200.png'%}" alt="">
+            <div class="p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h5>
+                        Rover
+                    </h5>
+                    <p class="productBoxText">
+                        Unicontrol GNSS Rover.
+                    </p>
+                </div>
+                <div>
+                    <button class="fakeButton">ORDER</button>
+                </div>
+            </div>
+        </div>
+        <div class="productBox d-flex flex-column">
+            <img src="{% static 'images/spareparts.png'%}" alt="">
+            <div class="p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h5>
+                        Spareparts
+                    </h5>
+                    <p class="productBoxText">
+                        All the parts you need.
+                    </p>
+                </div>
+                <div>
+                    <button class="fakeButton">ORDER</button>
+                </div>
+            </div>
+        </div>
+        <div class="productBox d-flex flex-column">
+            <img src="{% static 'images/spareparts.png'%}" alt="">
+            <div class="p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <h5>
+                        Licenses
+                    </h5>
+                    <p class="productBoxText">
+                        All the licenses you need.
+                    </p>
+                </div>
+                <div>
+                    <button class="fakeButton">ORDER</button>
+                </div>
+            </div>
+        </div>
+    </div> 
 </div>
 {% endblock content %}
 
 {% block script %}
+<script defer>
+    $(".fakeButton").on("click", function () {
+        alert("This product is not included in this prototype.\nOnly 'Excavator' is included in this prototype.")
+    });
+</script>
 {% endblock script %}

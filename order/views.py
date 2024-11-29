@@ -5,7 +5,7 @@ from django.http import HttpResponse
 def index(request):
     return render(request, "order/index.html")
 
-def products(request):
+def excavator(request):
     return render(request, "order/excavator.html")
 
 def summary(request):

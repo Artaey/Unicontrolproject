@@ -19,12 +19,19 @@ body {
     font-size: 14px !important;
 }
 
-button {
+button,
+.linkButton {
     background-color: var(--orange);
     color: white;
     padding: 8px 15px;
     border-radius: 3px !important;
     border: 0px;
+    text-decoration: none;
+}
+
+.linkButtonBox {
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .closeButton {
@@ -33,8 +40,27 @@ button {
 }
 
 .page {
-    width: calc(100% - 250px);
+    width: calc(100% - 250px + 1.5rem);
     margin-left: 250px;
+}
+
+.breadcrumb svg {
+    width: 14px;
+    transform: translate(0px, -2px);
+}
+
+.breadcrumb a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.row {
+    --bs-gutter-x: 0;
+}
+
+.row > * {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 /*Common end*/
 
@@ -72,7 +98,11 @@ nav label {
 /*Index page start*/
 .productBox {
     background-color: var(--card);
-    
+    width: calc(25% - 1.5rem);
+}
+
+.productBox > div {
+    height: 100%;
 }
 /*Index page end*/
 
@@ -136,7 +166,14 @@ thead tr {
 }
 /* Table end */
 
+/* Tablet size start */
 @media screen and (max-width: 1000px) {
+    /* Index */
+    .productBox {
+        width: calc(50% - 1.5rem);
+    }
+
+    /* Sidebar */
     .sidebar {
         width: 50px !important;
     }
@@ -182,4 +219,4 @@ thead tr {
         opacity: 1; 
     }
 }
-
+/* Tablet size end */
