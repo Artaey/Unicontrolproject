@@ -220,3 +220,84 @@ thead tr {
     }
 }
 /* Tablet size end */
+
+/*Username start*/
+.username { 
+    padding: 10px;
+}
+/*Username end*/
+
+/*Field start*/
+.fieldBox {
+    margin-top: 30px;
+}
+.h3Field {
+    padding: 10px;
+    display: flex;
+}
+
+.fieldBoxContent {
+    background-color: var(--card);
+}
+
+.fieldBoxContentImage {
+    display: inline-block;
+    box-sizing: content-box;
+    padding: 20px;
+}
+
+.fieldBoxContentImage img {
+    display: block;
+    max-width: 220px;
+    height: auto;
+}
+
+.questionIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldHeader {
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.fieldBoxContentInnerContainer {
+    display: flex;
+}
+
+.fieldBoxContentInnerHeaderTop {
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.fieldBoxContentInner {
+    gap: 20px;
+}
+
+.fieldOptionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+    gap: 40px;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.fieldOption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+}
+
+.fieldOptionPrice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+}
+
+/*Field end*/
