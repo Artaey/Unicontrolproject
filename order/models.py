@@ -41,7 +41,7 @@ class DropdownField(models.Model):
     parentCategory = models.CharField(max_length=100, default=None, blank=True, null=True)
     lableText = models.CharField(max_length=50)
     dropdownRequired = models.BooleanField()
-    readMore = models.CharField(max_length=255)
+    readMore = models.CharField(max_length=255, default=None, blank=True, null=True)
 
     def __str__(self) -> str:
         return self.lableText

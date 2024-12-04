@@ -12,7 +12,23 @@
             <p>/</p>
             <b>Excavator</b>
         </div>
-        {% include 'components/field.html'%}
+        {% for category, fields in grouped_data.items %}
+            <h2>{{ category }}</h2>
+            {% for field_data in fields %}
+                <h3>{{ field_data.field.lableText }}</h3>
+                <ul>
+                    {% for option_data in field_data.options %}
+                        <li>
+                            {{ option_data.option.optionText }} - 
+                            EUR: {{ option_data.prices.EUR }},
+                            DKK: {{ option_data.prices.DKK }},
+                            USD: {{ option_data.prices.USD }},
+                            AUD: {{ option_data.prices.AUD }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% endfor %}
     </div> 
 </div>
 {% endblock content %}
