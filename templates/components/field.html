@@ -1,5 +1,6 @@
 <div class="fieldBox ms-4">
-    <h3 class="h3Field">Tablet</h3>
+    {% for item in data %}
+    <h3 class="h3Field">Tablet</h3>    
     <div class="fieldBoxContent d-flex justify-content-start">
         <div class="fieldBoxContentImage d-flex flex-column justify-content-start">
             <img src="static/images/field_image.png" alt="Field Image" />
@@ -9,31 +10,17 @@
             <div class="fieldBoxContentInnerMainContainer d-flex justify-content-start">
                 <div class="fieldBoxContentInnerMainHeader d-flex flex-column justify-content-start">
                     <div class="fieldBoxContentInnerHeaderTop d-flex flex-row">
-                    <div class="fieldHeader mb-0 h5">Size</div>
+                    <div class="fieldHeader mb-0 h5">{{ item.category.lableText }}</div>
                     <div class="questionIcon"><i data-feather="help-circle"></i></div>
                     </div>
                         <div class="fieldBoxContentInner d-flex flex-row gap-4 flex-wrap">
-
+                            {% for option in item.options %}
                             <div class="fieldOptionContainer d-flex flex-row">
-                                <div class="fieldOption mb-0 h5">8" tablet</div>
+                                <div class="fieldOption mb-0 h5">{{ option.optionText }}</div>
                                 <div class="fieldOptionPrice mb-0">100 EURO</div>
                             </div>
-                                <div class="fieldOptionContainer d-flex flex-row">
-                                    <div class="fieldOption mb-0 h5">10" tablet</div>
-                                    <div class="fieldOptionPrice mb-0">350 EURO</div>
-                                </div>
-                                <div class="fieldOptionContainer d-flex flex-row">
-                                    <div class="fieldOption mb-0 h5">12" tablet</div>
-                                    <div class="fieldOptionPrice">450 EURO</div>
-                                </div>
-                                <div class="fieldOptionContainer d-flex flex-row">
-                                    <div class="fieldOption mb-0 h5">14" tablet</div>
-                                    <div class="fieldOptionPrice">499 EURO</div>
-                                </div>
-                                <div class="fieldOptionContainer d-flex flex-row">
-                                    <div class="fieldOption mb-0 h5">16" tablet</div>
-                                    <div class="fieldOptionPrice">549 EURO</div>
-                                </div>
+                            {% endfor %}
+                                
                             
                         </div>
                     </div>
@@ -55,4 +42,5 @@
             
         </div>
     </div>
+    {% endfor %}
 </div>
