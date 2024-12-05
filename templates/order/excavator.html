@@ -2,42 +2,34 @@
 
 {% block content %}
 <div class="page">
-    {% include 'components/header.html'%}
-    {% include 'components/cart.html'%} 
-    <div class="content">
-        {% include 'components/username.html' %}
-        <h4 class="ms-4">Excavator</h4>
-        <div class="breadcrumb d-flex gap-2 ms-4">
-            <a href="/"><i data-feather="home"></i></a> 
-            <p>/</p>
-            <b>Excavator</b>
-        </div>
-        {% for category, fields in grouped_data.items %}
-            <h2>{{ category }}</h2>
-            {% for field_data in fields %}
-                <h3>{{ field_data.field.lableText }}</h3>
-                <ul>
-                    {% for option_data in field_data.options %}
-                        <li>
-                            {{ option_data.option.optionText }} - 
-                            EUR: {{ option_data.prices.EUR }},
-                            DKK: {{ option_data.prices.DKK }},
-                            USD: {{ option_data.prices.USD }},
-                            AUD: {{ option_data.prices.AUD }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endfor %}
-        {% endfor %}
-    </div> 
+    <form method="post" action="/summary">
+        {% csrf_token %}
+        {% include 'components/header.html'%}
+        {% include 'components/cart.html'%} 
+        <div class="content">
+            {% include 'components/username.html' %}
+            <h4 class="ms-4">Excavator</h4>
+            <div class="breadcrumb d-flex gap-2 ms-4">
+                <a href="/"><i data-feather="home"></i></a> 
+                <p>/</p>
+                <b>Excavator</b>
+            </div>
+            {% include 'components/field.html' %}
+            <div class="d-flex justify-content-end mb-4 me-4">
+                <button type="submit" class="linkButton outButton">Place order</button>
+            </div>
+        </div> 
+    </form>
 </div>
 {% endblock content %}
 
 {% block script %}
 <script defer>
+    // cart
     const content = $(".content")
     const cart = $(".cart");
     const btnOrder = $(".btnOrder")
+    const outButton = $(".outButton")
     let cartOut = false;
 
     function getContentWidth() {
@@ -55,10 +47,12 @@
             let padding = contentWidth
             content.css("padding-right", padding)
             btnOrder.html("Hide order")
+            outButton.css("display", "none")
         }else {
             cart.css("right", "-" + contentWidth)
             content.css("padding-right", "0px")
             btnOrder.html("Show order")
+            outButton.css("display", "block")
         }
         cartOut = !cartOut 
     }
@@ -70,5 +64,9 @@
             cart.css("right", "-" + getContentWidth())
         }
     });
+</script>
+
+<script defer>
+    // fields
 </script>
 {% endblock script %}

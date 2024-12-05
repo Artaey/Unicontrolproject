@@ -5,6 +5,7 @@
     --text: #adb7be;
     --card: #323437;
     --background: #212224;
+    --box: #282a2c;
 }
 
 /*Common start*/
@@ -115,6 +116,7 @@ header {
     padding: 10px;
     display: flex;
     position: fixed;
+    top: 0px;
 }
 
 /*Header end*/
@@ -228,9 +230,7 @@ thead tr {
 /*Username end*/
 
 /*Field start*/
-.fieldBox {
-    margin-top: 30px;
-}
+
 .h3Field {
     padding: 10px;
     display: flex;
@@ -243,7 +243,7 @@ thead tr {
 .fieldBoxContentImage {
     display: inline-block;
     box-sizing: content-box;
-    padding: 20px;
+    padding: 1.5rem;
 }
 
 .fieldBoxContentImage img {
@@ -256,48 +256,56 @@ thead tr {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 18px;
 }
 
 .fieldHeader {
-    margin-top: 15px;
     padding: 5px;
 }
 
 .fieldBoxContentInnerContainer {
     display: flex;
-}
-
-.fieldBoxContentInnerHeaderTop {
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.fieldBoxContentInner {
-    gap: 20px;
+    width: 100%;
 }
 
 .fieldOptionContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--background);
-    gap: 40px;
-    padding: 20px;
+    background-color: var(--box);
+    border: 2px solid var(--box);
     border-radius: 3px;
+    width: calc(25% - 1.5rem);
+    min-width: 150px;
+    color: var(--text);
+    transition: border 0s;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.fieldOptionContainer:has(input[type="radio"]:checked) {
+    border-color: var(--orange);
 }
 
 .fieldOption {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .fieldOptionPrice {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
+    min-width: 52px;
+}
+
+@media screen and (max-width: 1000px) {
+    .fieldBoxContentImage {
+        width: 0px;
+        padding: calc(1.5rem / 2);
+    }
+
+    .fieldOptionContainer {
+        width: calc(33% - (1.5rem / (1 + (1/9))));
+    }
 }
 
 /*Field end*/

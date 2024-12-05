@@ -30,9 +30,6 @@ def excavator(request):
                 'option': option,
                 'prices': {
                     'EUR': prices.priceEUR if prices else None,
-                    'DKK': prices.priceDKK if prices else None,
-                    'USD': prices.priceUSD if prices else None,
-                    'AUD': prices.priceAUD if prices else None,
                 }
             })
         
