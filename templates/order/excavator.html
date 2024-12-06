@@ -66,7 +66,81 @@
     });
 </script>
 
+
+<script>
+$('.fieldOptionContainer input[type="checkbox"]').on('click', function (e) {
+        // Uncheck all other checkboxes with the same name
+        let name = $(this).attr('name');
+        $('input[name="' + name + '"]').not(this).prop('checked', false);
+
+        calculateTotalPrice();
+        updateCart();
+    });
+</script>
+
 <script defer>
-    // fields
+    // calculate total price
+    function calculateTotalPrice() {
+        let total = 0;
+
+        $('.fieldOptionContainer input[type="checkbox"]:checked').each(function () {
+            total += parseFloat($(this).data('price'));
+        });
+
+        console.log("Total Price:", total);
+        $(".netPrice").text(total.toFixed(0) + " EUR");
+        $(".msrpPrice").text((total * 1.6).toFixed(0) + " EUR");
+    }
+
+    calculateTotalPrice();
+</script>
+
+<script defer>
+    // update cart
+    function updateCart() {
+        let $cartBody = $(".cart table tbody");
+
+        $cartBody.empty();
+
+        $('.fieldOptionContainer input[type="checkbox"]:checked').each(function (index) {
+            let item = $(this).data('item');
+            let net = parseFloat($(this).data('price')).toFixed(0);
+            let msrp = (net * 1.6).toFixed(0);
+            let qty = $(this).data('qty') || 1;
+
+            $cartBody.append(`
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item}</td>
+                    <td>${msrp} <small>EUR</small></td>
+                    <td>${net} <small>EUR</small></td>
+                    <td>${qty}</td>
+                </tr>
+            `);
+        });
+
+        if ($cartBody.children().length === 0) {
+            $cartBody.append(`
+                <tr>
+                    <td colspan="5" class="text-center">No items in cart</td>
+                </tr>
+            `);
+        }
+    }
+
+    updateCart();
+</script>
+
+<script defer>
+    const fieldNames = "{% for category, fields in grouped_data.items %}{% for field_data in fields %}{{ field_data.field }} {% endfor %}{% endfor %}"
+
+    console.log(fieldNames);
+    
+    $("form").on("submit", function (e) {
+        e.preventDefault();
+
+       let requiredInputs = $('.fieldOptionContainer.required input[type="checkbox"]:checked');
+       console.log(requiredInputs.length)
+    });
 </script>
 {% endblock script %}
