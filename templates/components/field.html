@@ -2,8 +2,9 @@
     {% for category, fields in grouped_data.items %}
     <h3 class="h3Field">{{ category }}</h3>    
     <div class="fieldBoxContent d-flex justify-content-start">
+        
         <div class="fieldBoxContentImage d-flex flex-column justify-content-start">
-            <img src="static/images/field_image.png" alt="Field Image" />
+            <img src="{{ category.parentImgUrl }}" alt="Field Image" />
         </div>
         <div class="fieldBoxContentInnerContainer d-flex flex-column gap-4 pt-4 pb-4">
             {% for field_data in fields %}
@@ -17,8 +18,8 @@
                 </div>
                 <div class="fieldBoxContentInner d-flex flex-row gap-4 flex-wrap">
                     {% for option_data in field_data.options %}
-                    <label class="fieldOptionContainer {% if field_data.isRequired %} required {% endif %} d-flex flex-row gap-2 justify-content-between p-2">
-                        <input class="fieldInput" type="checkbox" name="field_{{ field_data.field.id }}" value="{{ option_data.option.id }}" data-no="" data-item="{{ option_data.option.optionText }}" data-price="{{ option_data.prices.EUR }}"/>
+                    <label class="fieldOptionContainer d-flex flex-row gap-2 justify-content-between p-2">
+                        <input class="fieldInput" type="checkbox" name="{{ field_data.field.lableText }}" value="{{ option_data.option.itemNo }}" data-item="{{ option_data.option.optionText }}" data-price="{{ option_data.prices.EUR }}"/>
                         <div class="fieldOption mb-0"><b>{{ option_data.option.optionText }}</b></div>
                         <div class="fieldOptionPrice mb-0">{{ option_data.prices.EUR }} <small>EUR</small></div>
                     </label>

@@ -3,7 +3,6 @@
 {% block content %}
 <div class="page">
     <form method="post" action="/summary">
-        {% csrf_token %}
         {% include 'components/header.html'%}
         {% include 'components/cart.html'%} 
         <div class="content">
@@ -68,8 +67,8 @@
 
 
 <script>
-$('.fieldOptionContainer input[type="checkbox"]').on('click', function (e) {
-        // Uncheck all other checkboxes with the same name
+    // checkbox handler
+    $('.fieldOptionContainer input[type="checkbox"]').on('click', function (e) {
         let name = $(this).attr('name');
         $('input[name="' + name + '"]').not(this).prop('checked', false);
 
@@ -89,7 +88,7 @@ $('.fieldOptionContainer input[type="checkbox"]').on('click', function (e) {
 
         console.log("Total Price:", total);
         $(".netPrice").text(total.toFixed(0) + " EUR");
-        $(".msrpPrice").text((total * 1.6).toFixed(0) + " EUR");
+        $(".msrpPrice").text((total * 1.4).toFixed(0) + " EUR");
     }
 
     calculateTotalPrice();
@@ -105,7 +104,7 @@ $('.fieldOptionContainer input[type="checkbox"]').on('click', function (e) {
         $('.fieldOptionContainer input[type="checkbox"]:checked').each(function (index) {
             let item = $(this).data('item');
             let net = parseFloat($(this).data('price')).toFixed(0);
-            let msrp = (net * 1.6).toFixed(0);
+            let msrp = (net * 1.4).toFixed(0);
             let qty = $(this).data('qty') || 1;
 
             $cartBody.append(`
@@ -132,15 +131,48 @@ $('.fieldOptionContainer input[type="checkbox"]').on('click', function (e) {
 </script>
 
 <script defer>
-    const fieldNames = "{% for category, fields in grouped_data.items %}{% for field_data in fields %}{{ field_data.field }} {% endfor %}{% endfor %}"
-
-    console.log(fieldNames);
+    // form
+    const requiredFieldNames = ("{% for category, fields in grouped_data.items %}{% for field_data in fields %}{% if field_data.isRequired %}{{ field_data.field.lableText }}~{% endif %}{% endfor %}{% endfor %}").split("~").slice(0,-1)
     
     $("form").on("submit", function (e) {
         e.preventDefault();
 
-       let requiredInputs = $('.fieldOptionContainer.required input[type="checkbox"]:checked');
-       console.log(requiredInputs.length)
+        let inputs = $('.fieldOptionContainer input[type="checkbox"]:checked');
+
+        // required check
+        let selectedNames = inputs.map(function () {
+            return $(this).attr('name');
+        }).get();
+
+        let missingFields = requiredFieldNames.filter(requiredField => !selectedNames.includes(requiredField));
+
+        if (missingFields.length > 0) {
+            alert("The following required fields are missing: " + missingFields.join(", "));
+        } else {
+            // send
+            let formData = inputs.map(function () {
+                return {
+                    name: $(this).attr('name'),
+                    value: $(this).val()
+                };
+            }).get();
+            
+            $.ajax({
+                url: "/summary",
+                method: "POST",
+                data: formData,
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                success: function (response) {
+                    console.log("Response from server:", response);
+                    window.location.href = '/summary';
+                },
+                error: function (error) {
+                    alert("An error occurred during submission.");
+                }
+            });
+        }
     });
 </script>
 {% endblock script %}

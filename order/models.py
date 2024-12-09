@@ -38,10 +38,11 @@ class SyncBomList(models.Model):
         return f"{self.no}"
 
 class DropdownField(models.Model):
-    parentCategory = models.CharField(max_length=100, default=None, blank=True, null=True)
+    parentCategory = models.ForeignKey("self", on_delete=models.DO_NOTHING, null=True, blank=True)
     lableText = models.CharField(max_length=50)
     dropdownRequired = models.BooleanField()
     readMore = models.CharField(max_length=255, default=None, blank=True, null=True)
+    parentImgUrl = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self) -> str:
         return self.lableText
@@ -60,28 +61,15 @@ class User(models.Model):
     def __str__(self) -> str:
         return self.name
     
-class UserSave(models.Model):
-    userId = models.ForeignKey(User, on_delete=models.CASCADE)
-    fieldId = models.ForeignKey(DropdownField, on_delete=models.DO_NOTHING)
-    name = models.CharField(max_length=255)
-    isFavorite = models.BooleanField()
-
-    def __str__(self) -> str:
-        return self.name
-    
-class UserSaveChoise(models.Model):
-    saveId = models.ForeignKey(UserSave, on_delete=models.CASCADE)
-    fieldId = models.ForeignKey(DropdownField, on_delete=models.DO_NOTHING)
-    optionId = models.ForeignKey(DropdownOption, on_delete=models.DO_NOTHING)
-
-    def __str__(self) -> str:
-        return self.saveId
-    
 class Order(models.Model):
-    userId = models.ForeignKey(User, on_delete=models.CASCADE)
-    itemNo =  models.ForeignKey(SyncSparepart, on_delete=models.CASCADE, to_field="no")
-    orderNumber = models.IntegerField()
-    price = models.IntegerField()
+    orderNumber = models.IntegerField(primary_key=True)
     
     def __str__(self) -> str:
         return f"{self.orderNumber}"
+    
+class OrderItem(models.Model):
+    orderNumber = models.ForeignKey(Order, on_delete=models.CASCADE, to_field="orderNumber")
+    itemNo = models.ForeignKey(SyncSparepart, on_delete=models.CASCADE, to_field="no")
+
+    def __str__(self) -> str:
+        return f"{self.itemNo}"

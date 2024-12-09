@@ -1,15 +1,15 @@
 <!-- Sidebar -->
 {% load static %}
 
-<nav class="sidebar p-2" style="width: 250px; height: 100vh;">
+<nav class="sidebar py-2" style="width: 250px; height: 100vh;">
     <div class="text-center">
         <img src="{% static 'images/unicontrol_logo.png' %}" alt="">
     </div>
     
     <ul class="nav flex-column">
-        <label>NAVIGATION</label>
+        <label class="ps-2">NAVIGATION</label>
         <li class="nav-item">
-            <a class="nav-link active d-flex" href="/">
+            <a class="nav-link active d-flex highlight" href="/">
                 <i class="fa-solid fa-boxes-stacked"></i>
                 <div>Products</div>
             </a>
@@ -38,14 +38,14 @@
                 <div>My profile</div>
             </a>
         </li>
-        <label style="color: red;">ADMIN</label>
+        <label class="ps-2" style="color: red;">ADMIN</label>
         <li class="nav-item" >
             <a class="nav-link d-flex" href="/admin">
                 <i data-feather="layers" style="color: red;"></i>
                 <div style="color: red;">Django admin</div>
             </a>
         </li>
-        <label>SUPPORT</label>
+        <label class="ps-2">SUPPORT</label>
         <li class="nav-item fakeLink">
             <a class="nav-link d-flex" href="#">
                 <i data-feather="help-circle"></i>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SyncSparepart, Price, SyncBomList, DropdownField, DropdownOption, User, UserSave, UserSaveChoise, Order
+from .models import SyncSparepart, Price, SyncBomList, DropdownField, DropdownOption, User, Order, OrderItem
 
 # Register your models here.
 class SyncSparepartAdmin(admin.ModelAdmin):
@@ -16,7 +16,7 @@ class SyncBomListAdmin(admin.ModelAdmin):
 admin.site.register(SyncBomList, SyncBomListAdmin)
 
 class DropdownFieldAdmin(admin.ModelAdmin):
-    list_display = ("parentCategory","lableText", "dropdownRequired", "readMore")
+    list_display = ("parentCategory","lableText", "dropdownRequired", "readMore", "parentImgUrl")
 admin.site.register(DropdownField, DropdownFieldAdmin)
 
 class DropdownOptionAdmin(admin.ModelAdmin):
@@ -25,14 +25,8 @@ admin.site.register(DropdownOption, DropdownOptionAdmin)
 
 admin.site.register(User)
 
-class UserSaveAdmin(admin.ModelAdmin):
-    list_display = ("userId", "fieldId", "name", "isFavorite")
-admin.site.register(UserSave, UserSaveAdmin)
+admin.site.register(Order)
 
-class UserSaveChoiseAdmin(admin.ModelAdmin):
-    list_display = ("saveId", "fieldId", "optionId")
-admin.site.register(UserSaveChoise, UserSaveChoiseAdmin)
-
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ("userId", "itemNo", "orderNumber", "price")
-admin.site.register(Order, OrderAdmin)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ("orderNumber", "itemNo")
+admin.site.register(OrderItem, OrderItemAdmin)

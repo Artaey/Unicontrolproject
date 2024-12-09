@@ -77,6 +77,12 @@ button,
 .sidebar a {
     color: white !important;
     min-width: 200px;
+    border-left: 3px solid var(--card);
+}
+
+.sidebar a.highlight {
+    border-left: 3px solid var(--orange);
+    background-color: #21222462;
 }
 
 .sidebar svg {
@@ -179,10 +185,6 @@ thead tr {
     /* Sidebar */
     .sidebar {
         width: 50px !important;
-    }
-
-    .sidebar a {
-        padding-left: 8px;
     }
 
     .sidebar img,
