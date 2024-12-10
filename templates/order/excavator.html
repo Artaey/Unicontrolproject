@@ -175,4 +175,61 @@
         }
     });
 </script>
+
+<script defer>
+    
+    //collapse fields
+    let prevClass = "skip"
+    $('.fieldOptionContainer input[type="checkbox"]').on("click", function() {
+        collapseChecker(this)
+    });
+
+    $(".collapsedText").on("click", function() {
+        collapseChecker(this)
+
+        $(".collapsedText."+prevClass).css("display", "none");
+        $(".fieldBoxContent."+prevClass).addClass("d-flex").css("display", "block");
+    });
+
+    function collapseChecker(that) {
+        let thisClass = $(that).attr("class").replace(/(collapsedText p-4 h6|warning|fieldInput|required|\s)/g, "");
+        console.log("bob");
+        
+        let extraText = ""
+        
+        if (prevClass != "skip" && thisClass != prevClass) {
+            $(".fieldBoxContent."+prevClass).removeClass("d-flex").css("display", "none");
+            let collapsedText = $(".collapsedText."+prevClass);
+            collapsedText.css("display", "block");
+
+            
+
+            if ($(".fieldInput.required."+prevClass+":checked").length < 1) {
+                collapsedText.addClass("warning");
+                extraText = "(required missing)";
+            } else {
+                collapsedText.removeClass("warning");   
+                
+            };
+
+            updateHidden(prevClass, extraText);
+        }        
+
+        prevClass = thisClass
+    }
+
+    function updateHidden(category, extraText) {
+        console.log(extraText);
+        let collapsedText = $(".collapsedText."+category);
+        collapsedText.text("");
+        
+        let CheckedInputs = $(".fieldInput."+category+":checked");
+
+        let text = CheckedInputs.map(function () {
+            return $(this).data("item");
+        }).get().join(" + ");
+        
+        collapsedText.text(text + " " + extraText);
+    }
+</script>
 {% endblock script %}

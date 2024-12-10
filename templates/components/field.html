@@ -1,7 +1,7 @@
 <div class="fieldBox m-4">
     {% for category, fields in grouped_data.items %}
     <h3 class="h3Field">{{ category }}</h3>    
-    <div class="fieldBoxContent d-flex justify-content-start">
+    <div class="fieldBoxContent {{ category }} d-flex justify-content-start">
         
         <div class="fieldBoxContentImage d-flex flex-column justify-content-start">
             <img src="{{ category.parentImgUrl }}" alt="Field Image" />
@@ -11,7 +11,7 @@
             
             <div class="fieldBoxContentInnerMainContainer d-flex flex-column">
                 <div class="fieldBoxContentInnerHeaderTop d-flex gap-2">
-                    <div class="fieldHeader mb-0 h6">{{ field_data.field.lableText }}{% if field_data.isRequired %} (required) {% endif %}</div>
+                    <div class="fieldHeader mb-0 h6">{{ field_data.field.lableText }}{% if field_data.isRequired %} (Required) {% endif %}</div>
                     {% if field_data.readMore %}
                     <div class="questionIcon" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ field_data.field.id }}" aria-expanded="false" aria-controls="collapse{{ field_data.field.id }}"><i data-feather="help-circle"></i></div>
                     {% endif %}
@@ -19,7 +19,7 @@
                 <div class="fieldBoxContentInner d-flex flex-row gap-4 flex-wrap">
                     {% for option_data in field_data.options %}
                     <label class="fieldOptionContainer d-flex flex-row gap-2 justify-content-between p-2">
-                        <input class="fieldInput" type="checkbox" name="{{ field_data.field.lableText }}" value="{{ option_data.option.itemNo }}" data-item="{{ option_data.option.optionText }}" data-price="{{ option_data.prices.EUR }}"/>
+                        <input class="fieldInput {% if field_data.isRequired %}required{% endif %} {{ category }}" type="checkbox" name="{{ field_data.field.lableText }}" value="{{ option_data.option.itemNo }}" data-item="{{ option_data.option.optionText }}" data-price="{{ option_data.prices.EUR }}"/>
                         <div class="fieldOption mb-0"><b>{{ option_data.option.optionText }}</b></div>
                         <div class="fieldOptionPrice mb-0">{{ option_data.prices.EUR }} <small>EUR</small></div>
                     </label>
@@ -32,6 +32,8 @@
             {% endfor %}
         </div>
     </div>
+    <div class="collapsedText p-4 h6 {{ category }}"></div>
     {% endfor %}
+    </div>
 </div>
 

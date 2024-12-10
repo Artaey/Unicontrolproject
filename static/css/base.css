@@ -300,6 +300,17 @@ input[type="checkbox"] {
     min-width: 52px;
 }
 
+.collapsedText {
+    display: none;
+    background-color: var(--card);
+    cursor: pointer;
+    border: 3px solid var(--card);
+}
+
+.collapsedText.warning {
+    border-color: red;
+}
+
 @media screen and (max-width: 1000px) {
     .fieldBoxContentImage {
         width: 0px;
