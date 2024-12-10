@@ -5,5 +5,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("excavator", views.excavator, name="excavator"),
     path("summary", views.summary, name="summary"),
-    path("confirmation", views.confirmation, name="confirmation")
+    path("getCartItems", views.getCartItems, name="getCartItems")
 ]

@@ -66,5 +66,25 @@ def summary(request):
 
     return render(request, "order/summary.html")
 
-def confirmation(request):
-    return render(request, "order/confirmation.html")
+def getCartItems(request):
+    if request.method == 'POST':
+
+        item_ids = request.POST.getlist('item_ids[]', [])
+        items = []
+
+        for item_id in item_ids:
+            try:
+                sparepart = SyncSparepart.objects.get(no=item_id)
+                price = Price.objects.get(no=sparepart)
+                items.append({
+                    'id': sparepart.no,
+                    'description': sparepart.itemDescription,
+                    'net_price': price.priceEUR,
+                    'msrp': round(price.priceEUR * 1.4),
+                })
+            except (SyncSparepart.DoesNotExist, Price.DoesNotExist):
+                continue
+
+        return JsonResponse({'items': items}, status=200)
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)

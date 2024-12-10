@@ -99,32 +99,46 @@
     function updateCart() {
         let $cartBody = $(".cart table tbody");
 
-        $cartBody.empty();
+        let selectedIds = $('.fieldOptionContainer input[type="checkbox"]:checked')
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
 
-        $('.fieldOptionContainer input[type="checkbox"]:checked').each(function (index) {
-            let item = $(this).data('item');
-            let net = parseFloat($(this).data('price')).toFixed(0);
-            let msrp = (net * 1.4).toFixed(0);
-            let qty = $(this).data('qty') || 1;
-
-            $cartBody.append(`
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${item}</td>
-                    <td>${msrp} <small>EUR</small></td>
-                    <td>${net} <small>EUR</small></td>
-                    <td>${qty}</td>
-                </tr>
-            `);
+            $.ajax({
+            url: '/getCartItems',
+            type: 'POST',
+            data: {
+                item_ids: selectedIds, 
+                csrfmiddlewaretoken: '{{ csrf_token }}' 
+            },
+            success: function (response) {
+                $cartBody.empty();
+                
+                if (response.items && response.items.length > 0) {
+                    response.items.forEach((item, index) => {
+                        $cartBody.append(`
+                            <tr>
+                                <td>${item.id}</td>
+                                <td>${item.description}</td>
+                                <td>${item.msrp} <small>EUR</small></td>
+                                <td>${item.net_price} <small>EUR</small></td>
+                                <td>1</td>
+                            </tr>
+                        `);
+                    });
+                } else {
+                    $cartBody.append(`
+                        <tr>
+                            <td colspan="5" class="text-center">No items in cart</td>
+                        </tr>
+                    `);
+                }
+            },
+            error: function () {
+                alert('Failed to update cart. Please try again.');
+            }
         });
-
-        if ($cartBody.children().length === 0) {
-            $cartBody.append(`
-                <tr>
-                    <td colspan="5" class="text-center">No items in cart</td>
-                </tr>
-            `);
-        }
     }
 
     updateCart();
@@ -193,7 +207,6 @@
 
     function collapseChecker(that) {
         let thisClass = $(that).attr("class").replace(/(collapsedText p-4 h6|warning|fieldInput|required|\s)/g, "");
-        console.log("bob");
         
         let extraText = ""
         
@@ -219,7 +232,6 @@
     }
 
     function updateHidden(category, extraText) {
-        console.log(extraText);
         let collapsedText = $(".collapsedText."+category);
         collapsedText.text("");
         
