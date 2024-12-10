@@ -173,6 +173,10 @@ thead tr {
     background-color: var(--orange);
     color: white;
 }
+
+.indentChild {
+    
+}
 /* Table end */
 
 /* Tablet size start */
@@ -233,7 +237,6 @@ thead tr {
 /*Username end*/
 
 /*Field start*/
-
 .h3Field {
     padding: 10px;
     display: flex;
@@ -304,7 +307,7 @@ input[type="checkbox"] {
     display: none;
     background-color: var(--card);
     cursor: pointer;
-    border: 3px solid var(--card);
+    border: 2px solid var(--card);
 }
 
 .collapsedText.warning {

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import SyncSparepart, Price, DropdownField, DropdownOption, Order, OrderItem
+from .models import SyncSparepart, SyncBomList, Price, DropdownField, Order, OrderItem
 
 # Front page.
 def index(request):
@@ -67,24 +67,55 @@ def summary(request):
     return render(request, "order/summary.html")
 
 def getCartItems(request):
-    if request.method == 'POST':
+    if request.method == "POST":
 
-        item_ids = request.POST.getlist('item_ids[]', [])
+        item_ids = request.POST.getlist("item_ids[]", [])
         items = []
 
         for item_id in item_ids:
             try:
                 sparepart = SyncSparepart.objects.get(no=item_id)
                 price = Price.objects.get(no=sparepart)
+                isKit = "SparepartKit" in sparepart.name
+
                 items.append({
-                    'id': sparepart.no,
-                    'description': sparepart.itemDescription,
-                    'net_price': price.priceEUR,
-                    'msrp': round(price.priceEUR * 1.4),
+                    "id": sparepart.no,
+                    "description": sparepart.itemDescription,
+                    "netPrice": price.priceEUR,
+                    "msrp": round(price.priceEUR * 1.4),
+                    "isKit": isKit,
+                    "isParent": True,
+                    "isChild": False,
                 })
+                
+                if isKit:
+                    child_items = SyncBomList.objects.filter(parentItemNo=sparepart)
+                    print(child_items)
+                    for child in child_items:
+                        try:
+                            child_sparepart = child.no
+                            print(f"Child sparepart: {child_sparepart}")
+
+                            child_price = Price.objects.get(no=child_sparepart)
+                            print(f"Child price for {child_sparepart.no}: {child_price.priceEUR}")
+
+                            items.append({
+                                "id": child_sparepart.no,
+                                "description": child_sparepart.itemDescription,
+                                "netPrice": child_price.priceEUR,
+                                "msrp": round(child_price.priceEUR * 1.4),
+                                "quantity": child.quantity,
+                                "isKit": False, 
+                                "isParent": False,
+                                "isChild": True,
+                            })
+                        except Exception as e:
+                            print(f"Error processing child item: {e}")
+
             except (SyncSparepart.DoesNotExist, Price.DoesNotExist):
                 continue
 
-        return JsonResponse({'items': items}, status=200)
+        
+        return JsonResponse({"items": items}, status=200)
 
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+    return JsonResponse({"error": "Invalid request"}, status=400)

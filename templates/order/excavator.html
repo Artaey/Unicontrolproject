@@ -110,20 +110,36 @@
             type: 'POST',
             data: {
                 item_ids: selectedIds, 
-                csrfmiddlewaretoken: '{{ csrf_token }}' 
+                csrfmiddlewaretoken: '{{ csrf_token }}'
             },
             success: function (response) {
                 $cartBody.empty();
+
+                console.log(response);
                 
+
                 if (response.items && response.items.length > 0) {
                     response.items.forEach((item, index) => {
+                        
+                        let rowClass = item.isKit ? 'tableSubheader' : '';
+                        let description = item.isChild ? ` - ${item.description}` : item.description;
+                        let quantity = item.isChild
+                            ? item.quantity
+                            : item.isKit
+                            ? ""
+                            : 1;
+
                         $cartBody.append(`
-                            <tr>
+                            <tr class="${rowClass}">
                                 <td>${item.id}</td>
-                                <td>${item.description}</td>
-                                <td>${item.msrp} <small>EUR</small></td>
-                                <td>${item.net_price} <small>EUR</small></td>
-                                <td>1</td>
+                                <td>${description}</td>
+                                ${
+                                    !item.isChild
+                                        ? `<td class="text-end">${item.msrp} <small>EUR</small></td>
+                                        <td class="text-end">${item.netPrice} <small>EUR</small></td>`
+                                        : `<td></td><td></td>`
+                                }
+                                <td class="text-center">${quantity}</td>
                             </tr>
                         `);
                     });
