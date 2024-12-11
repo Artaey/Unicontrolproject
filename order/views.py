@@ -90,7 +90,6 @@ def getCartItems(request):
                 
                 if isKit:
                     child_items = SyncBomList.objects.filter(parentItemNo=sparepart)
-                    print(child_items)
                     for child in child_items:
                         try:
                             child_sparepart = child.no
