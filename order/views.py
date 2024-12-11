@@ -94,10 +94,8 @@ def getCartItems(request):
                     for child in child_items:
                         try:
                             child_sparepart = child.no
-                            print(f"Child sparepart: {child_sparepart}")
 
                             child_price = Price.objects.get(no=child_sparepart)
-                            print(f"Child price for {child_sparepart.no}: {child_price.priceEUR}")
 
                             items.append({
                                 "id": child_sparepart.no,
