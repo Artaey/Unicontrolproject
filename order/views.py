@@ -112,7 +112,6 @@ def getCartItems(request):
             except (SyncSparepart.DoesNotExist, Price.DoesNotExist):
                 continue
 
-        
         return JsonResponse({"items": items}, status=200)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
