@@ -42,8 +42,6 @@ def summary(request):
 
         received_data = request.POST.dict()
 
-        print("Received data:", received_data)
-
         last_order = Order.objects.order_by('-orderNumber').first()
         next_order_number = last_order.orderNumber + 1 if last_order else 1
 
