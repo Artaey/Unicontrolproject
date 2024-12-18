@@ -326,3 +326,8 @@ input[type="checkbox"] {
 }
 
 /*Field end*/
+
+
+.box {
+    background-color: var(--card);
+}
